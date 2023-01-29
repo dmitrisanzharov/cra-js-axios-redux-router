@@ -9,11 +9,15 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import storeConfig from "./redux/storeConfiguration";
 
+// RTQ
+import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
+import { mainApi } from "./redux/api/mainApi";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<Provider store={storeConfig}>
+	<ApiProvider api={mainApi}>
 		<App />
-	</Provider>
+	</ApiProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
