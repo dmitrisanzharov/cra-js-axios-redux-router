@@ -1,7 +1,7 @@
 import "./App.css";
 
 function App() {
-	return <div>app</div>;
+	return <div className="addPadding">app</div>;
 }
 
 export default App;
