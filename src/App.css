@@ -29,7 +29,6 @@
 }
 
 .inputBox {
-  border: 1px solid red;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
