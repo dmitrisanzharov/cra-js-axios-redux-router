@@ -1,1 +1,26 @@
-/*# sourceMappingURL=Comp2.css.map */
+.Camp2Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.Camp2Container_h1Holder {
+  text-align: center;
+  overflow: hidden;
+  width: 300px;
+}
+
+.Camp2Container_h1Holder_title {
+  font-size: 6em;
+  animation: Slide_Up 2s ease;
+}
+
+@keyframes Slide_Up {
+  0% {
+    transform: translateY(250px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}/*# sourceMappingURL=Comp2.css.map */

@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"Comp2.css"}
+{"version":3,"sources":["Comp2.scss","Comp2.css"],"names":[],"mappings":"AAAA;EACC,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,gBAAA;ACCD;;ADEA;EACC,kBAAA;EACA,gBAAA;EACA,YAAA;ACCD;;ADEA;EACC,cAAA;EACA,2BAAA;ACCD;;ADEA;EACC;IACC,4BAAA;ECCA;EDCD;IACC,0BAAA;ECCA;AACF","file":"Comp2.css"}
