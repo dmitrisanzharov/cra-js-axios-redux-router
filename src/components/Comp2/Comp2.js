@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import "./Comp2.css";
 
 const Comp2 = () => {
