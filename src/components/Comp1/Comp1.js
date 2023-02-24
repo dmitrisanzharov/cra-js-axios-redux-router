@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Comp1.css";
 import data from "./data";
 import classNames from "classnames";
@@ -8,8 +8,25 @@ const Comp1 = () => {
 	const [direction, setDirection] = useState("");
 	const [disableBtn, setDisableBtn] = useState(false);
 
+	// states for the move thing
+	const [isDown, setIsDown] = useState(false);
+	const [startX, setStartX] = useState(null);
+	const [scrollLeft, setScrollLeft] = useState(null);
+
+	const sliderBox = useRef();
+
+	// FUNCTIONS
+
+	function handleMouseDown(e) {
+		console.log("triggered");
+		setIsDown(true);
+		setStartX(e.pageX - sliderBox.offsetLeft); // this registers where the mouse was clicked and START of dragging
+	}
+
+	// useEffects
+
 	useEffect(() => {
-		console.log("idxOfVisible", idxOfVisible);
+		// console.log("idxOfVisible", idxOfVisible);
 
 		if (idxOfVisible === 5) {
 			const timeOut = setTimeout(() => {
@@ -32,6 +49,16 @@ const Comp1 = () => {
 		}, 501);
 		return () => clearTimeout(timeOut);
 	}, [idxOfVisible]);
+
+	// working on the move by hand thing
+
+	useEffect(() => {
+		console.log(sliderBox.current);
+
+		sliderBox.current.addEventListener("mousedown", handleMouseDown, {
+			once: true,
+		});
+	}, []);
 
 	return (
 		<div className="mainContainer drr">
@@ -68,6 +95,8 @@ const Comp1 = () => {
 							(idxOfVisible === 1 && direction === "right"),
 					})}
 					style={{ transform: `translateX(${idxOfVisible * -292}px)` }}
+					ref={sliderBox}
+					draggable="true"
 				>
 					{data?.map((el, i) => {
 						const { name, image } = el;
