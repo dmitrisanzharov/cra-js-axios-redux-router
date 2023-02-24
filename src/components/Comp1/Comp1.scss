@@ -1,0 +1,49 @@
+.drr {
+	border: 2px solid red;
+}
+
+.dbb {
+	border: 2px solid blue;
+}
+
+.dgg {
+	border: 2px solid green;
+}
+
+.dyy {
+	border: 2px solid yellow;
+}
+
+.dpp {
+	border: 2px solid pink;
+}
+
+.mainContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 40px;
+}
+
+.frame {
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
+}
+
+.sliderBox {
+	display: flex;
+	transition: transform 0.5s;
+}
+
+.singleItem {
+	min-width: 292px;
+	height: 292px;
+	background-position: center;
+	background-size: cover;
+}
+
+.noAnimation--yes {
+	transition: transform 0s;
+}
