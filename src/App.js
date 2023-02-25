@@ -9,7 +9,7 @@ function App() {
 	return (
 		<div className="addPadding">
 			{/* <Comp1 /> */}
-			<hr />
+			{/* <hr /> */}
 			<Comp2 />
 			{/* <Comp3 /> */}
 		</div>

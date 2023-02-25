@@ -7,6 +7,10 @@ const Comp3 = () => {
 	const [scrollRight, setScrollRight] = useState(0);
 	const [scrollBottom, setScrollBottom] = useState(0);
 
+	function handleMouseDown(e) {
+		console.log(e.pageX);
+	}
+
 	useEffect(() => {
 		container3.current.scrollLeft = scrollRight;
 	}, [scrollBottom, scrollRight]);
@@ -19,7 +23,15 @@ const Comp3 = () => {
 			<button onClick={() => setScrollRight(scrollRight + 20)}>
 				scroll right
 			</button>
-			<div className="container3 drr" ref={container3}>
+			<div
+				className="container3 drr"
+				ref={container3}
+				onTouchStart={(e) => {
+					console.log(e.touches[0].clientX);
+				}}
+
+				// onMouseMove={(e) => handleMouseMove(e)}
+			>
 				<div className="item3"></div>
 				<div className="item3"></div>
 				<div className="item3"></div>
