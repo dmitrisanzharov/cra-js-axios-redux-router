@@ -14,6 +14,7 @@ const Comp1 = () => {
 	const [directionButtonClicked, setDirectionButtonClicked] = useState("");
 	const [sliderArr, setSliderArr] = useState([5, 1, 2, 3, 4, 5, 1]);
 	const [stopAnime, setStopAnime] = useState(false);
+	const [btnDisable, setBtnDisable] = useState(false);
 
 	// functions
 	function handleMouseDown(e) {
@@ -93,6 +94,7 @@ const Comp1 = () => {
 	function handleTranstionEnd() {
 		// console.log("count", count);
 		setStopAnime(true);
+		setBtnDisable(false);
 
 		if (count === 0) {
 			setCount(5);
@@ -128,7 +130,9 @@ const Comp1 = () => {
 						setCount(count - 1);
 						setDirectionButtonClicked("left");
 						setStopAnime(false);
+						setBtnDisable(true);
 					}}
+					disabled={btnDisable}
 				>
 					left
 				</button>
@@ -137,7 +141,9 @@ const Comp1 = () => {
 						setCount(count + 1);
 						setDirectionButtonClicked("left");
 						setStopAnime(false);
+						setBtnDisable(true);
 					}}
+					disabled={btnDisable}
 				>
 					right
 				</button>
