@@ -1,1 +1,41 @@
-/*# sourceMappingURL=Comp1.css.map */
+.Comp1 {
+  padding: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.itemsHolder {
+  white-space: nowrap;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: grab;
+  height: 200px;
+  width: 400px;
+  overflow: hidden;
+}
+
+.itemsString {
+  transition: transform 0.5s ease-out;
+}
+
+.itemsString--NoTransition {
+  transition: none;
+}
+
+.item {
+  height: 200px;
+  width: 400px;
+  display: inline-flex;
+  border: 1px solid yellow;
+  background-color: lightblue;
+  justify-content: center;
+  align-items: center;
+  font-size: 5em;
+}
+
+.buttonActive {
+  background-color: red;
+}/*# sourceMappingURL=Comp1.css.map */

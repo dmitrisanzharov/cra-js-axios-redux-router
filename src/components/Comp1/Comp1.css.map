@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"Comp1.css"}
+{"version":3,"sources":["Comp1.scss","Comp1.css"],"names":[],"mappings":"AAAA;EACC,cAAA;EACA,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,sBAAA;ACCD;;ADEA;EACC,mBAAA;EACA,yBAAA;KAAA,sBAAA;UAAA,iBAAA;EACA,YAAA;EACA,aAAA;EACA,YAAA;EACA,gBAAA;ACCD;;ADEA;EACC,mCAAA;ACCD;;ADEA;EACC,gBAAA;ACCD;;ADEA;EACC,aAAA;EACA,YAAA;EACA,oBAAA;EACA,wBAAA;EACA,2BAAA;EAEA,uBAAA;EACA,mBAAA;EACA,cAAA;ACAD;;ADGA;EACC,qBAAA;ACAD","file":"Comp1.css"}
