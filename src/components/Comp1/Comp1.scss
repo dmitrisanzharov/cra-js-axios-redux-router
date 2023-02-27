@@ -1,0 +1,45 @@
+.Comp1 {
+	padding: 100px;
+	border: 1px solid red;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.itemsHolder {
+	border: 1px solid blue;
+	height: 200px;
+	width: 400px;
+	white-space: nowrap;
+	cursor: grab;
+	user-select: none;
+	overflow: hidden;
+}
+
+.itemsHolder--isDown {
+	cursor: grabbing;
+}
+
+.itemsString {
+	transition: transform 0.5s ease-out;
+}
+
+.itemsString--NoTransition {
+	transition: none;
+}
+
+.item {
+	border: 1px solid yellow;
+	display: inline-flex;
+	height: 200px;
+	width: 400px;
+	background: lightblue;
+	justify-content: center;
+	align-items: center;
+	font-size: 4em;
+}
+
+.activeSlideButton {
+	background-color: red;
+}
