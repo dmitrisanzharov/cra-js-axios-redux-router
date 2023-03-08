@@ -1,1 +1,21 @@
-/*# sourceMappingURL=Comp1.css.map */
+.Comp1 {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  background-color: #333;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.draggable {
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid black;
+  cursor: move;
+}
+
+.draggable.dragging {
+  background-color: red;
+}/*# sourceMappingURL=Comp1.css.map */
