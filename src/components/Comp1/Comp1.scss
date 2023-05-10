@@ -1,0 +1,15 @@
+div div {
+	color: red;
+}
+
+div > div {
+	color: red;
+}
+
+div > div > div {
+	color: red;
+}
+
+div + div + div {
+	color: red;
+}

@@ -1,1 +1,15 @@
-/*# sourceMappingURL=Comp1.css.map */
+div div {
+  color: red;
+}
+
+div > div {
+  color: red;
+}
+
+div > div > div {
+  color: red;
+}
+
+div + div + div {
+  color: red;
+}/*# sourceMappingURL=Comp1.css.map */

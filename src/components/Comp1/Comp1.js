@@ -1,9 +1,29 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
-import "./Comp1.css";
-import { useForm } from "react-hook-form";
+import React, {
+	useEffect,
+	useState,
+	useReducer,
+	useMemo,
+	useCallback,
+} from "react";
+import Comp2 from "../Comp2/Comp2";
 
-const Comp1 = () => {
-	return <div className="Comp1">Comp1</div>;
+const Comp1 = (props) => {
+	const [count, setCount] = useState(0);
+
+	const myObj = {
+		name: "la",
+	};
+
+	useEffect(() => {
+		console.log("runs");
+	}, [myObj]);
+
+	return (
+		<>
+			<h1>{count}</h1>
+			<button onClick={() => setCount(count + 1)}>+</button>
+		</>
+	);
 };
 
 export default Comp1;
