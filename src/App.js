@@ -7,8 +7,9 @@ import Comp2 from "./components/Comp2/Comp2";
 function App() {
 	return (
 		<div className="addPadding">
+			<h1 id='hw1'>Hello World</h1>
 			<Comp1 />
-			{/* <Comp2 /> */}
+			<Comp2 />
 		</div>
 	);
 }
