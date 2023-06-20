@@ -1,15 +1,18 @@
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import "./App.css";
 
 // components
 import Comp1 from "./components/Comp1/Comp1";
-import Comp2 from "./components/Comp2/Comp2";
+import TourCard from "./components/TourCard";
 
 function App() {
 	return (
-		<div className="addPadding">
-			<Comp1 />
-			{/* <Comp2 /> */}
-		</div>
+		<Container maxWidth="xl">
+			<Grid container spacing={5}>
+				<TourCard />
+			</Grid>
+		</Container>
 	);
 }
 
