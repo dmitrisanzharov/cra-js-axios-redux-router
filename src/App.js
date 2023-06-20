@@ -8,11 +8,16 @@ import TourCard from "./components/TourCard";
 
 function App() {
 	return (
-		<Container maxWidth="xl">
-			<Grid container spacing={5}>
-				<TourCard />
-			</Grid>
-		</Container>
+		<>
+			<Container maxWidth="xl">
+				<Grid container spacing={5}>
+					<TourCard />
+					<TourCard />
+					<TourCard />
+					<TourCard />
+				</Grid>
+			</Container>
+		</>
 	);
 }
 
