@@ -10,13 +10,14 @@ import Comp1 from "./components/Comp1/Comp1";
 import TourCard from "./components/TourCard";
 import SearchAppBar from "./components/SearchAppBar";
 import Tour from "./components/Tour";
+import ConditionalStylingExample from './components/ConditionalStylingExample'
 
 function App() {
 	console.log(cities);
 
 	return (
 		<>
-			<SearchAppBar />
+			{/* <SearchAppBar />
 			<Container sx={{ my: 3 }} sx={{ display: "none" }}>
 				{cities.map((city) => {
 					return (
@@ -32,10 +33,11 @@ function App() {
 						</React.Fragment>
 					);
 				})}
-			</Container>
+			</Container> */}
 			{/* <Comp1 /> */}
-			<hr />
-			<Tour />
+			{/* <hr />
+			<Tour /> */}
+			<ConditionalStylingExample />
 		</>
 	);
 }
