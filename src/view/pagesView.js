@@ -6,6 +6,7 @@ import UseContextSampleUse from "../pages/UseContextSampleUse";
 import ClassComponentsAndProps from "../pages/ClassComponentsAndProps";
 import UseRef from "../pages/UseRef";
 import ReduxSample from "../pages/ReduxSample";
+import CreateApiSample from '../pages/CreateApiSample';
 
 const pagesView = [
 	{
@@ -49,6 +50,12 @@ const pagesView = [
 		url: "/redux-sample",
 		text: "redux sample",
 		component: <ReduxSample />,
+	},
+	{
+		id: 8,
+		url: "/redux-create-api-sample",
+		text: "redux create api sample, react query sample",
+		component: <CreateApiSample />,
 	},
 ];
 export default pagesView;

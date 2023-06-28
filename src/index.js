@@ -9,10 +9,17 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import storeConfig from "./redux/storeConfiguration";
 
+// redux API, React query
+import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
+import { apiSlice } from "./redux/api/apiSlice";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<Provider store={storeConfig}>
-		<App />
+		<ApiProvider api={apiSlice}>
+			<App />
+		</ApiProvider>
+	
 	</Provider>
 );
 
