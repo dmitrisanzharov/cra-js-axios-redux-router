@@ -13,8 +13,21 @@ export const apiSlice = createApi({
         getOneById: builder.query({
             query: (id) => `/${id}`,
         }),
+        getTestArg: builder.query({
+            query: (arg1) => {
+                console.log(arg1);
+                return {
+                    url: '/', 
+                    params: ':anyName', // params can be taken from Argument
+                    headers: { // Headers can be inserted like below
+						'Content-Type': 'application/json',
+						'Accept': 'application/json'
+					}
+                }
+            }
+        })
     }),
 });
 
 
-export const { useGetAllQuery, useGetOneByIdQuery } = apiSlice; // MUST HAVE  use  at front  AND Query at the end
+export default apiSlice; // MUST HAVE  use  at front  AND Query at the end
