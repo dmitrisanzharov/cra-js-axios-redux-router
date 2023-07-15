@@ -1,16 +1,22 @@
 import "./App.css";
 
 // components
-import Comp1 from "./components/Comp1/Comp1";
-import Comp2 from "./components/Comp2/Comp2";
+import BasicTable from "./components/BasicTable";
+import SortedTable from "./components/SortedTable";
+import FilteringTable from "./components/FilteringTable";
+import PaginationTable from "./components/PaginationTable";
+import RowSelection from "./components/RowSelection";
 
 function App() {
-	return (
-		<div className="addPadding">
-			<Comp1 />
-			{/* <Comp2 /> */}
-		</div>
-	);
+  return (
+    <div className="addPadding">
+      {/* <BasicTable /> */}
+      {/* <SortedTable /> */}
+      {/* <FilteringTable /> */}
+      {/* <PaginationTable /> */}
+      <RowSelection />
+    </div>
+  );
 }
 
 export default App;
