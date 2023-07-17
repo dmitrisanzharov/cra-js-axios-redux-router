@@ -3,54 +3,55 @@ import {
   useReactTable,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import "./styles.css";
-import data from "./data.json";
-import { columnDef, columnDefWithMerge, columnDef2 } from "./columns";
+import dataJSON from "./data.json";
+import { columnDef } from "./columns";
 
 const BasicTable = () => {
-  const dataFinal = React.useMemo(() => data, []);
-  const columnsFinal = React.useMemo(() => columnDef2, []);
+  //   const dataFinal = React.useMemo(() => data, []);
+  const columnsFinal = React.useMemo(() => columnDef, []);
 
-  const [filtering, setFiltering] = React.useState("");
+  const [sorting, setSorting] = React.useState([]);
+  const [data, setData] = React.useState(dataJSON);
 
   const tableInstance = useReactTable({
-    data: dataFinal,
+    data: data,
     columns: columnsFinal,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     state: {
-      globalFilter: filtering,
+      sorting,
     },
-    onGlobalFilterChanged: setFiltering,
+    getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
   });
 
   const { getHeaderGroups, getRowModel } = tableInstance;
 
   return (
     <>
-      <input
-        type="text"
-        value={filtering}
-        onChange={(e) => setFiltering(e.target.value)}
-      />
-      <hr />
       <table>
         <thead>
           {getHeaderGroups().map((headerGroupEl) => {
             return (
               <tr key={headerGroupEl.id}>
                 {headerGroupEl.headers.map((columnEl) => {
-                  console.log(columnEl);
                   return (
-                    <th colSpan={columnEl.colSpan} key={columnEl.id}>
-                      {columnEl.isPlaceholder
-                        ? null
-                        : flexRender(
-                            columnEl.column.columnDef.header,
-                            columnEl.getContext()
-                          )}
+                    <th
+                      colSpan={columnEl.colSpan}
+                      key={columnEl.id}
+                      {...{
+                        className: columnEl.column.getCanSort()
+                          ? "cursor-pointer select-none"
+                          : "",
+                        onClick: columnEl.column.getToggleSortingHandler(),
+                      }}
+                    >
+                      {flexRender(
+                        columnEl.column.columnDef.header,
+                        columnEl.getContext()
+                      )}
                     </th>
                   );
                 })}

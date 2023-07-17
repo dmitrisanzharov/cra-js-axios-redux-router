@@ -8,12 +8,13 @@ import {
 import "./styles.css";
 import data from "./data.json";
 import { columnDef, columnDefWithMerge, columnDef2 } from "./columns";
+import FilterFunction from "./FilterFunction.js";
 
 const BasicTable = () => {
   const dataFinal = React.useMemo(() => data, []);
   const columnsFinal = React.useMemo(() => columnDef2, []);
 
-  const [filtering, setFiltering] = React.useState("");
+  const [columnFilters, setColumnFilters] = React.useState([]);
 
   const tableInstance = useReactTable({
     data: dataFinal,
@@ -21,21 +22,15 @@ const BasicTable = () => {
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     state: {
-      globalFilter: filtering,
+      columnFilters: columnFilters,
     },
-    onGlobalFilterChanged: setFiltering,
+    onColumnFiltersChange: setColumnFilters,
   });
 
   const { getHeaderGroups, getRowModel } = tableInstance;
 
   return (
     <>
-      <input
-        type="text"
-        value={filtering}
-        onChange={(e) => setFiltering(e.target.value)}
-      />
-      <hr />
       <table>
         <thead>
           {getHeaderGroups().map((headerGroupEl) => {
@@ -45,12 +40,22 @@ const BasicTable = () => {
                   console.log(columnEl);
                   return (
                     <th colSpan={columnEl.colSpan} key={columnEl.id}>
-                      {columnEl.isPlaceholder
-                        ? null
-                        : flexRender(
+                      {columnEl.isPlaceholder ? null : (
+                        <>
+                          {flexRender(
                             columnEl.column.columnDef.header,
                             columnEl.getContext()
                           )}
+                          {columnEl.column.getCanFilter() ? (
+                            <div>
+                              <FilterFunction
+                                column={columnEl.column}
+                                table={tableInstance}
+                              />
+                            </div>
+                          ) : null}
+                        </>
+                      )}
                     </th>
                   );
                 })}

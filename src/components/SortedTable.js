@@ -1,81 +1,87 @@
 import React from "react";
-import { useTable, useSortBy } from "react-table";
+import {
+  useReactTable,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+} from "@tanstack/react-table";
 import "./styles.css";
 import data from "./data.json";
-import { COLUMNS } from "./columns";
+import { columnDef, columnDefWithMerge, columnDef2 } from "./columns";
 
 const BasicTable = () => {
+  const [sorting, setSorting] = React.useState([]);
+
   const dataFinal = React.useMemo(() => data, []);
-  const columnsFinal = React.useMemo(() => COLUMNS, []);
+  const columnsFinal = React.useMemo(() => columnDef2, []);
 
-  const tableInstance = useTable(
-    {
-      data: dataFinal,
-      columns: columnsFinal,
+  const tableInstance = useReactTable({
+    data: dataFinal,
+    columns: columnsFinal,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting: sorting,
     },
-    useSortBy
-  );
+    onSortingChange: setSorting,
+  });
 
-  const {
-    headerGroups,
-    footerGroups,
-    getTableProps,
-    rows,
-    prepareRow,
-    getTableBodyProps,
-  } = tableInstance;
+  const { getHeaderGroups, getRowModel } = tableInstance;
 
   return (
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map((headerGroupEl) => (
-          <tr {...headerGroupEl.getHeaderGroupProps()}>
-            {headerGroupEl.headers.map((columnEl) => (
-              <th {...columnEl.getHeaderProps(columnEl.getSortByToggleProps())}>
-                {columnEl.render("Header")}
-                <span>
-                  {columnEl.isSorted
-                    ? columnEl.isSortedDesc
-                      ? " - arwDown"
-                      : " - arwUp"
-                    : ""}
-                </span>
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((rowEl) => {
-          prepareRow(rowEl);
-          return (
-            <tr {...rowEl.getRowProps()}>
-              {rowEl.cells.map((cellEl) => {
-                return (
-                  <td {...cellEl.getCellProps()}>{cellEl.render("Cell")}</td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-      <tfoot>
-        {footerGroups.map((footerGroupsEl) => {
-          return (
-            <tr {...footerGroupsEl.getFooterGroupProps()}>
-              {footerGroupsEl.headers.map((columnEl) => {
-                return (
-                  <th {...columnEl.getFooterProps()}>
-                    {" "}
-                    {columnEl.render("Footer")}
-                  </th>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tfoot>
-    </table>
+    <>
+      <table>
+        <thead>
+          {getHeaderGroups().map((headerGroupEl) => {
+            return (
+              <tr key={headerGroupEl.id}>
+                {headerGroupEl.headers.map((columnEl) => {
+                  return (
+                    <th
+                      colSpan={columnEl.colSpan}
+                      key={columnEl.id}
+                      onClick={columnEl.column.getToggleSortingHandler()}
+                    >
+                      {columnEl.isPlaceholder ? null : (
+                        <>
+                          {flexRender(
+                            columnEl.column.columnDef.header,
+                            columnEl.getContext()
+                          )}
+                          {
+                            { asc: " -UP", desc: " -DOWN" }[
+                              columnEl.column.getIsSorted() ?? null
+                            ]
+                          }
+                        </>
+                      )}
+                    </th>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </thead>
+        <tbody>
+          {getRowModel().rows.map((rowEl) => {
+            return (
+              <tr key={rowEl.id}>
+                {rowEl.getVisibleCells().map((cellEl) => {
+                  return (
+                    <td key={cellEl.id}>
+                      {flexRender(
+                        cellEl.column.columnDef.cell,
+                        cellEl.getContext()
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
   );
 };
 

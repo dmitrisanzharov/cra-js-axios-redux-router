@@ -1,71 +1,67 @@
 import React from "react";
-import { useTable } from "react-table";
+import {
+  useReactTable,
+  flexRender,
+  getCoreRowModel,
+} from "@tanstack/react-table";
 import "./styles.css";
 import data from "./data.json";
-import { COLUMNS } from "./columns";
+import { columnDef, columnDefWithMerge, columnDef2 } from "./columns";
 
 const BasicTable = () => {
   const dataFinal = React.useMemo(() => data, []);
-  const columnsFinal = React.useMemo(() => COLUMNS, []);
+  const columnsFinal = React.useMemo(() => columnDef2, []);
 
-  const tableInstance = useTable({
+  const tableInstance = useReactTable({
     data: dataFinal,
     columns: columnsFinal,
+    getCoreRowModel: getCoreRowModel(),
   });
 
-  const {
-    headerGroups,
-    footerGroups,
-    getTableProps,
-    rows,
-    prepareRow,
-    getTableBodyProps,
-  } = tableInstance;
+  const { getHeaderGroups, getRowModel } = tableInstance;
 
   return (
     <>
-      <table {...getTableProps()}>
+      <table>
         <thead>
-          {headerGroups.map((headerGroupEl) => (
-            <tr {...headerGroupEl.getHeaderGroupProps()}>
-              {headerGroupEl.headers.map((columnEl) => (
-                <th {...columnEl.getHeaderProps()}>
-                  {columnEl.render("Header")}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((rowEl) => {
-            prepareRow(rowEl);
+          {getHeaderGroups().map((headerGroupEl) => {
             return (
-              <tr {...rowEl.getRowProps()}>
-                {rowEl.cells.map((cellEl) => {
+              <tr key={headerGroupEl.id}>
+                {headerGroupEl.headers.map((columnEl) => {
+                  console.log(columnEl);
                   return (
-                    <td {...cellEl.getCellProps()}>{cellEl.render("Cell")}</td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-        <tfoot>
-          {footerGroups.map((footerGroupsEl) => {
-            return (
-              <tr {...footerGroupsEl.getFooterGroupProps()}>
-                {footerGroupsEl.headers.map((columnEl) => {
-                  return (
-                    <th {...columnEl.getFooterProps()}>
-                      {" "}
-                      {columnEl.render("Footer")}
+                    <th colSpan={columnEl.colSpan} key={columnEl.id}>
+                      {columnEl.isPlaceholder
+                        ? null
+                        : flexRender(
+                            columnEl.column.columnDef.header,
+                            columnEl.getContext()
+                          )}
                     </th>
                   );
                 })}
               </tr>
             );
           })}
-        </tfoot>
+        </thead>
+        <tbody>
+          {getRowModel().rows.map((rowEl) => {
+            return (
+              <tr key={rowEl.id}>
+                {rowEl.getVisibleCells().map((cellEl) => {
+                  return (
+                    <td key={cellEl.id}>
+                      {flexRender(
+                        cellEl.column.columnDef.cell,
+                        cellEl.getContext()
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </>
   );
