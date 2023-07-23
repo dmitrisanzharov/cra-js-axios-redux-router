@@ -1,5 +1,6 @@
 import moment from "moment";
 import { createColumnHelper, ColumnDef } from "@tanstack/react-table";
+import IndeterminateCheckbox from "./IndeterminateCheckbox";
 
 const columnHelper = createColumnHelper();
 
@@ -60,18 +61,42 @@ export const columnDef = [
     accessorKey: "phone",
     header: "phone",
     footer: "ftr_phone",
+    enableColumnFilter: false,
   },
   {
     accessorKey: "dob",
     header: "Date of Birth",
     footer: "ftr_dob",
     cell: ({ getValue }) => moment(new Date(getValue())).format("MMM Do YY"),
+    disableFilters: true,
   },
 ];
 
 export const columnDef2 = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <IndeterminateCheckbox
+        {...{
+          checked: table.getIsAllRowsSelected(),
+          indeterminate: table.getIsSomeRowsSelected(),
+          onChange: table.getToggleAllRowsSelectedHandler(),
+        }}
+      />
+    ),
+    cell: ({ row }) => (
+      <IndeterminateCheckbox
+        {...{
+          checked: row.getIsSelected(),
+          disabled: !row.getCanSelect(),
+          indeterminate: row.getIsSomeSelected(),
+          onChange: row.getToggleSelectedHandler(),
+        }}
+      />
+    ),
+  },
   columnHelper.accessor("id", {
-    header: "id",
+    header: "id2",
   }),
   {
     accessorKey: "dob",

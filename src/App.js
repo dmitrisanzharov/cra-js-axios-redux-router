@@ -7,9 +7,9 @@ import FilteringTable from "./components/FilteringTable";
 import PaginationTable from "./components/PaginationTable";
 import RowSelection from "./components/RowSelection";
 import ColumnFiltering from "./components/ColumnFiltering";
-
-// v8
+import ColumnOrdering from "./components/ColumnOrdering";
 import SortingTableV8 from "./components/SortingTableV8";
+import ToggleVisibility from "./components/ToggleVisibility";
 
 function App() {
   return (
@@ -22,7 +22,10 @@ function App() {
       {/* V8 */}
       {/* <SortingTableV8 /> */}
       {/* <BasicTable /> */}
-      <ColumnFiltering />
+      {/* <ColumnFiltering /> */}
+      {/* <ColumnOrdering /> */}
+      {/* <ToggleVisibility /> */}
+      <RowSelection />
     </div>
   );
 }

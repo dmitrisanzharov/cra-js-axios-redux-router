@@ -3,65 +3,76 @@ import {
   useReactTable,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
 } from "@tanstack/react-table";
 import "./styles.css";
 import data from "./data.json";
-import { columnDef, columnDefWithMerge, columnDef2 } from "./columns";
-import FilterFunction from "./FilterFunction.js";
+import { columnDef2 } from "./columns";
 
 const BasicTable = () => {
+  const [columnVisibility, setColumnVisibility] = React.useState({});
+
   const dataFinal = React.useMemo(() => data, []);
-  const columnsFinal = React.useMemo(() => columnDef, []);
-
-  // location: columnEl.column.columnDef
-  const defaultColumn = React.useMemo(() => ({
-    victor: "yo",
-  }));
-
-  const [columnFilters, setColumnFilters] = React.useState([]);
+  const columnsFinal = React.useMemo(() => columnDef2, []);
 
   const tableInstance = useReactTable({
     data: dataFinal,
     columns: columnsFinal,
-    defaultColumn: defaultColumn,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     state: {
-      columnFilters: columnFilters,
+      columnVisibility: columnVisibility,
     },
-    onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
   });
 
   const { getHeaderGroups, getRowModel } = tableInstance;
 
   return (
     <>
+      <div>
+        <label>
+          <input
+            {...{
+              type: "checkbox",
+              checked: tableInstance.getIsAllColumnsVisible(),
+              onChange: tableInstance.getToggleAllColumnsVisibilityHandler(),
+            }}
+          />{" "}
+          Toggle All
+        </label>
+      </div>
+      <hr />
+      {tableInstance.getAllLeafColumns().map((column) => {
+        return (
+          <div key={column.id}>
+            <label>
+              <input
+                {...{
+                  type: "checkbox",
+                  checked: column.getIsVisible(),
+                  onChange: column.getToggleVisibilityHandler(),
+                }}
+              />{" "}
+              {column.id}
+            </label>
+          </div>
+        );
+      })}
+      <hr />
       <table>
         <thead>
           {getHeaderGroups().map((headerGroupEl) => {
             return (
               <tr key={headerGroupEl.id}>
                 {headerGroupEl.headers.map((columnEl) => {
-                  console.log(columnEl.column.columnDef);
+                  console.log(columnEl);
                   return (
                     <th colSpan={columnEl.colSpan} key={columnEl.id}>
-                      {columnEl.isPlaceholder ? null : (
-                        <>
-                          {flexRender(
+                      {columnEl.isPlaceholder
+                        ? null
+                        : flexRender(
                             columnEl.column.columnDef.header,
                             columnEl.getContext()
                           )}
-                          {columnEl.column.getCanFilter() ? (
-                            <div>
-                              <FilterFunction
-                                column={columnEl.column}
-                                table={tableInstance}
-                              />
-                            </div>
-                          ) : null}
-                        </>
-                      )}
                     </th>
                   );
                 })}
