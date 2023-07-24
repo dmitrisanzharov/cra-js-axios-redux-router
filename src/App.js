@@ -1,14 +1,18 @@
 import "./App.css";
 
 // components
+import DummyComp from "./components/DummyComp";
 
 
 function App() {
-	return (
-		<div className="addPadding">
+  return (
+    <div>
+      <DummyComp />
 
-		</div>
-	);
+    </div>
+  );
 }
 
 export default App;
+
+
