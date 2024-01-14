@@ -3,8 +3,8 @@ import { MyContext } from './ContextAsABlockWrapper'
 
 const Component2 = () => {
 
-  const contextValues = React.useContext(MyContext);
-  console.log("Component 2: contextValues: ", contextValues);
+  const objValues = React.useContext(MyContext);
+  console.log("Component 2: objValues: ", objValues);
 
   return (
     <div>Component2</div>
